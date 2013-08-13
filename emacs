@@ -9,3 +9,11 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; Add newline at the end of edited buffer
 (defconst require-final-newline 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Adding goodies to enhance use exp  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-taming-mr-arneson)
+
