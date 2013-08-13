@@ -16,7 +16,9 @@ sudo apt-get install emacs-goodies-el
 sudo apt-get install git
 
 then clone this repo wherever you feel like and creat symbolic link in your home dir to emacs like this:
-ln -s path/to/cloned/repo/emacs .emacs
+ln -s path/to/cloned/repo/emacs ~/.emacs
+cd ~/emacs.d/
+ln -s path/to/cloned/repo/lib .
 
 TODO
 - Ensure single and only one newline character is left in buffer after save.
