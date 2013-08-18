@@ -5,11 +5,15 @@ This is not really a project but merely an attempt to unify all my emacs setting
 I would like to create a personal tool suitable for my development but hopefully it can help others too.
 My main dev languages are PHP and Python with bits of HTML, CSS and JS so I would like to focus on features supporting their syntax.
 
-General settings
+General settings:
+- Programming languages syntax highlight
+- Autocomplete for language syntax as well as defined entities
 - using 2 spaces for indentation. No one likes TABs so there's no reason for me to use them either.
+- Display current column and line number
 - Ads newline character if not present already
+- Highlight parentheses
 
-Requirements
+Requirements:
 Of course basic requirement is to install git, emacs and goodies so on debian do:
 sudo apt-get install emacs23-nox
 sudo apt-get install emacs-goodies-el
@@ -20,10 +24,6 @@ ln -s path/to/cloned/repo/emacs ~/.emacs
 cd ~/emacs.d/
 ln -s path/to/cloned/repo/lib .
 
-TODO
+TODO:
 - Ensure single and only one newline character is left in buffer after save.
 - Highlight all tabs and rubbish characters
-- PHP mode
-- Python mode
-- CSS mode
-- HTML mode
