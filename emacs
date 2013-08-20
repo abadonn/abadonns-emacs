@@ -67,6 +67,12 @@
 (global-set-key "\C-c\C-r" 'x-reload-dot-emacs)
 (global-set-key "\C-c\C-e" 'x-edit-dot-emacs)
 
+;; Place temp files into tmp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setting indent standards           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
