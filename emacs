@@ -19,7 +19,6 @@
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 ;emacs can recognise lisp mode for .emacs but not emacs
 (add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Adding goodies to enhance use exp  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -84,11 +83,27 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; Add newline at the end of edited buffer
 (defconst require-final-newline 1)
-
+;; Show me trailing whitespaces, long lines and tabs
+(require 'whitespace)
+(autoload 'whitespace-mode
+  "whitespace" "Toggle whitespace visualization."        t)
+(autoload 'whitespace-toggle-options
+  "whitespace" "Toggle local `whitespace-mode' options." t)
+(global-whitespace-mode 1)
+(set-face-attribute 'whitespace-line nil
+                    :background "red1"
+                    :foreground "yellow"
+                    :weight 'bold)
+(set-face-attribute 'whitespace-tab nil
+                    :background "red1"
+                    :foreground "yellow"
+                    :weight 'bold)
+(setq whitespace-line-column 120
+      whitespace-style '(face tabs trailing lines-tail))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Hacks - or - what needs to be      ;;
 ;; removed later                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Hiding warnings when not developing emacs
 ;It is here for stuff like mumamo warnings etc
-;(setq warning-minimum-level :error)
+(setq warning-minimum-level :error)
