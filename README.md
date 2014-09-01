@@ -18,6 +18,7 @@ Of course basic requirement is to install git, emacs and goodies so on debian do
 sudo apt-get install emacs23-nox
 sudo apt-get install emacs-goodies-el
 sudo apt-get install git
+sudo apt-get install python-virtualenv
 
 then clone this repo wherever you feel like and creat symbolic link in your home dir to emacs like this:
 ln -s path/to/cloned/repo/emacs ~/.emacs
