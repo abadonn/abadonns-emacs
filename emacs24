@@ -19,7 +19,9 @@
 (require 'cl)
 
 (defvar prelude-packages
-  '(zenburn-theme multi-term jedi flycheck)
+  '(multi-term python-mode yasnippet php-mode php-extras web-mode autopair
+               blank-mode csv-mode cyberpunk-theme debian-changelog-mode
+               highline windata tree-mode dirtree)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -44,10 +46,29 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq multi-term-program "/bin/zsh")
 
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)       
+(global-highline-mode 1)
+(set-face-background 'highline-face "#333")
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(yas-global-mode 1)
+
+(ac-config-default)
+
+(defun autopair-insert-opening ()
+     (interactive)
+     (when (autopair-pair-p)
+       (setq autopair-action (list 'opening (autopair-find-pair) (point))))
+     (autopair-fallback))
+(autopair-global-mode)
+
+(autoload 'dirtree "dirtree" "Add directory to tree view" t)
+
+(autoload 'global-blank-mode           "blank-mode" "Toggle blank visualization."        t)
+(global-blank-mode 1)
+(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+;emacs can recognise lisp mode for .emacs but not emacs
+(add-to-list 'auto-mode-alist '("emacs24" . lisp-mode))
+(add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Getting manually installed libs    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -57,7 +78,7 @@
 ;; Adding goodies to enhance use exp  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;colour theming
-(load-theme 'misterioso t)
+(load-theme 'cyberpunk t)
 
 ;shortening yes / no to y / n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -125,20 +146,16 @@
 ;It is here for stuff like mumamo warnings etc
 (setq warning-minimum-level :error)
 
-;emacs can recognise lisp mode for .emacs but not emacs
-(add-to-list 'auto-mode-alist '("emacs24" . lisp-mode))
-(add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
-
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("3b819bba57a676edf6e4881bd38c777f96d1aa3b3b5bc21d8266fa5b0d0f1ebf" default)))
  '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "3b819bba57a676edf6e4881bd38c777f96d1aa3b3b5bc21d8266fa5b0d0f1ebf" default)))
  '(show-paren-mode t)
  '(size-indication-mode t))
 (custom-set-faces
