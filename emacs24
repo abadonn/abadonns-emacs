@@ -19,7 +19,7 @@
 (require 'cl)
 
 (defvar prelude-packages
-  '(multi-term python-mode yasnippet php-mode php-extras web-mode autopair
+  '(multi-term python-mode yasnippet php-mode php-extras web-mode
                blank-mode csv-mode cyberpunk-theme debian-changelog-mode
                highline windata tree-mode dirtree)
   "A list of packages to ensure are installed at launch.")
@@ -53,17 +53,10 @@
 
 (ac-config-default)
 
-(defun autopair-insert-opening ()
-     (interactive)
-     (when (autopair-pair-p)
-       (setq autopair-action (list 'opening (autopair-find-pair) (point))))
-     (autopair-fallback))
-(autopair-global-mode)
-
 (autoload 'dirtree "dirtree" "Add directory to tree view" t)
 
 (autoload 'global-blank-mode           "blank-mode" "Toggle blank visualization."        t)
-(global-blank-mode 1)
+(global-set-key "\M-#" 'global-blank-mode)
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 ;emacs can recognise lisp mode for .emacs but not emacs
@@ -79,7 +72,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;colour theming
 (load-theme 'cyberpunk t)
-
+(electric-pair-mode 1)
+(setq electric-pair-pairs '(
+                            (?\' . ?\')
+                            (?\{ . ?\})
+                            ) )
 ;shortening yes / no to y / n
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; Highlight parenthesis pairs
@@ -115,6 +112,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Replace TABs with 2 spaces
 (setq-default c-basic-indent 2)
+(setq c-basic-offset 2)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 ;; Remove trailing white-spaces on save
