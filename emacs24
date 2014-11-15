@@ -21,7 +21,7 @@
 (defvar prelude-packages
   '(multi-term python-mode yasnippet php-mode php-extras web-mode
                blank-mode csv-mode cyberpunk-theme debian-changelog-mode
-               highline windata tree-mode dirtree)
+               highline windata tree-mode dirtree auto-complete)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
