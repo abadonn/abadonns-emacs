@@ -2,6 +2,18 @@
 ;; Custom Emacs24 setup file          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setting python virtual env         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(push "~/venvs/emacs/bin" exec-path)
+(setenv "PATH"
+        (concat
+         "~/venvs/emacs/bin" ":"
+         (getenv "PATH")
+         ))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package archives                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,6 +23,9 @@
   ("marmalade" . "http://marmalade-repo.org/packages/")
   ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/elisp/")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Installing some default packages   ;;
 ;; that we want to have everywhere    ;;
@@ -20,8 +35,8 @@
 (defvar prelude-packages
   '(multi-term python-mode yasnippet php-mode php-extras web-mode
                blank-mode csv-mode cyberpunk-theme debian-changelog-mode
-               highline windata tree-mode dirtree auto-complete pymacs
-               js2-mode bookmark+)
+               highline windata tree-mode dirtree auto-complete
+               js2-mode bookmark+ magit)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -42,6 +57,19 @@
 (provide 'prelude-packages)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setting up manually retrieved pkgs ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setting up installed packages      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq multi-term-program "/bin/zsh")
@@ -52,6 +80,10 @@
 (yas-global-mode 1)
 
 (ac-config-default)
+(ac-ropemacs-initialize)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (add-to-list 'ac-sources 'ac-source-ropemacs)))
 
 (autoload 'dirtree "dirtree" "Add directory to tree view" t)
 
@@ -71,7 +103,7 @@
 ;; Adding goodies to enhance use exp  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;IDO mode
-(ido-mode 1)
+(ido-mode t)
 ;persisting commands
 (savehist-mode 1)
 ;colour theming
