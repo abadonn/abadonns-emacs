@@ -15,13 +15,15 @@
 ;; Installing some default packages   ;;
 ;; that we want to have everywhere    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'pymacs)
 
 (require 'cl)
 
 (defvar prelude-packages
   '(multi-term python-mode yasnippet php-mode php-extras web-mode
                blank-mode csv-mode cyberpunk-theme debian-changelog-mode
-               highline windata tree-mode dirtree auto-complete)
+               highline windata tree-mode dirtree auto-complete pymacs
+               js2-mode bookmark+)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -70,6 +72,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Adding goodies to enhance use exp  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;IDO mode
+(ido-mode 1)
 ;persisting commands
 (savehist-mode 1)
 ;colour theming
@@ -183,6 +187,7 @@ Uses `current-date-time-format' for the formatting the date/time."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "/home/abadonn/.emacs.d/bookmarks")
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
