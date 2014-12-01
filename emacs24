@@ -15,8 +15,6 @@
 ;; Installing some default packages   ;;
 ;; that we want to have everywhere    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'pymacs)
-
 (require 'cl)
 
 (defvar prelude-packages
